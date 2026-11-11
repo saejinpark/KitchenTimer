@@ -34,7 +34,10 @@ enum TimerNotifications {
                 intentIdentifiers: []
             ),
         ])
-        center.requestAuthorization(options: [.alert, .sound]) { _, _ in }
+        // 권한 창에 답하면 바로 경고 표시를 갱신한다(안 하면 허용해도 "꺼져 있어요"가 남는다).
+        center.requestAuthorization(options: [.alert, .sound]) { _, _ in
+            Task { @MainActor in await KitchenPrefs.shared.refreshNotificationStatus() }
+        }
     }
 
     static func isAuthorized() async -> Bool {

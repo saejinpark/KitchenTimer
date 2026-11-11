@@ -49,7 +49,6 @@ struct QueueView: View {
     @Environment(KitchenPrefs.self) private var prefs
     @Environment(AddFlow.self) private var flow
     @Environment(\.scenePhase) private var scenePhase
-    @State private var notificationsOff = false
     var onAdd: () -> Void
 
     /// 타이머가 이보다 많으면 한 줄짜리 촘촘한 목록으로 바꾼다.
@@ -61,7 +60,7 @@ struct QueueView: View {
                 ContentUnavailableView {
                     Label("타이머 없음", systemImage: "timer")
                 } description: {
-                    if notificationsOff {
+                    if prefs.notificationsOff {
                         Label("알림이 꺼져 있어요", systemImage: "bell.slash.fill")
                             .foregroundStyle(.orange)
                     } else {
@@ -76,7 +75,7 @@ struct QueueView: View {
             }
         }
         .task(id: scenePhase) {
-            notificationsOff = !(await TimerNotifications.isAuthorized())
+            await prefs.refreshNotificationStatus()
         }
         .toolbar {
             // 방금 넣은 메뉴를 한 번 더: 피크 타임에 같은 주문이 연달아 들어올 때.
@@ -103,7 +102,7 @@ struct QueueView: View {
         let blink = Int(queue.now.timeIntervalSinceReferenceDate) % 2 == 0
 
         return List {
-            if notificationsOff {
+            if prefs.notificationsOff {
                 NotificationsOffRow()
             }
 

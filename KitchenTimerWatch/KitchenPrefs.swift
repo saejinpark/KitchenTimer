@@ -41,6 +41,13 @@ final class KitchenPrefs {
             .flatMap { try? JSONDecoder().decode(RecipeUsage.self, from: $0) } ?? RecipeUsage()
     }
 
+    /// 알림 권한이 꺼져 있는지. 처음 실행 때 권한 창에 답한 직후와 앱이 다시 보일 때 갱신한다.
+    private(set) var notificationsOff = false
+
+    func refreshNotificationStatus() async {
+        notificationsOff = !(await TimerNotifications.isAuthorized())
+    }
+
     func recordUse(_ recipe: Recipe) {
         usage.record(recipe.id)
     }
