@@ -1,7 +1,7 @@
 Kitchen Timer (주방 타이머) — App Review Notes
 
 1. SCREEN RECORDING
-A screen recording captured on a physical iPhone and Apple Watch running the latest OS is attached to this submission (see Attachment). It starts by launching the iPhone app, then launches the Apple Watch app and shows the typical flow: adding timers, a multi-step timer waiting for confirmation, the finish alert, and acknowledging it.
+A screen recording captured on a physical iPhone and Apple Watch running the latest OS is attached to this submission (see Attachment). Both physical devices are shown side by side on a Mac (iPhone via iPhone Mirroring, Apple Watch via Xcode's device screen view) and recorded together. It starts by launching the iPhone app, then launches the Apple Watch app and shows the typical flow: adding timers, a multi-step timer waiting for confirmation, the finish alert, and acknowledging it.
 The app has no account registration, login, user-generated content, or paid content.
 
 2. PURPOSE AND TARGET AUDIENCE
